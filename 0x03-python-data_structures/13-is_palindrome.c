@@ -33,29 +33,7 @@ listint_t *reverse_listint(listint_t **head)
 */
 int is_palindrome(listint_t **head)
 {
-	listint_t *s1 = *head;
-	listint_t *s2 = *head;
-	listint_t *n1, *n2;
-
 	if (head == NULL) /*An empty list is considered a palindrome*/
 		return (1);
-
-	while ((s1->next != NULL)  && (s1->next->next != NULL))
-	{
-		s1 = s1->next->next; /*1st node must move at twice the speed*/
-		s2 = s2->next; /*2nd node must move at half the speed of s1*/
-	}
-	n1 = *head;
-	n2 = reverse_listint(&(s2->next));
-	while (n2 != NULL && n1 != NULL)
-	{
-		if (n1->n != n2->n)
-		{
-			return (0);
-		}
-	}
-	n1 = n1->next;
-	n2 = n2->next;
-
 	return (1);
 }
