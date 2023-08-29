@@ -2,7 +2,7 @@
 def safe_print_integer(value):
     
     try:
-        print("{:d}".forma(t(value)))
+        print("{:d}".forma((value)))
         return (True)
     except ValueError:
         return (False)
