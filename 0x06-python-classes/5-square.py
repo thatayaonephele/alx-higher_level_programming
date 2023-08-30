@@ -21,21 +21,9 @@ class Square:
         return self.__size
 
     @size.setter
-    """
-        Size function:
-        This fuction has setter property.
 
-        Argumentss:
-            val: The value is assigend a size.
-
-        Raise a TypeError if size is not an integer
-        exception must contain the message "size must be an integer."
-
-        If size is < 0, raise a ValueError exception
-        with the message "size must be >= 0"
-        """
     def size(self, value):
-        if (value >= 0) is not True:
+        if (value < 0):
             raise ValueError('size must be >= 0')
         if (isinstance(value, int)) is not True:
             raise TypeError('size must be an integer')
