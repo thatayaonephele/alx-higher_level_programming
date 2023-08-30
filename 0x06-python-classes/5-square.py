@@ -23,6 +23,7 @@ class Square:
     @size.setter
 
     def size(self, value):
+        """This gets or sets the current size of the square."""
         if (value < 0):
             raise ValueError('size must be >= 0')
         if (isinstance(value, int)) is not True:
