@@ -9,7 +9,7 @@
 int check_cycle(listint_t *list)
 {
 	listint_t *x = list; /*initialization of x ptr*/
-	list_t *y = list; /*defining of y ptr*/	
+	listint_t *y = list; /*defining of y ptr*/	
 
 	while (x && y) /*iterate if both y and x are defined*/
 	{
