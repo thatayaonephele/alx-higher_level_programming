@@ -6,9 +6,9 @@ def magic_calculation(a, b):
     j = 6
     from magic_calculation_102 import sub, add
     if a > b:
-        return (sub(b, a))
+        return (sub(a, b))
     else:
-        ret_val = add(b, a)
+        ret_val = add(a, b)
         for x in range(i, j):
-            ret_val = add(x, ret_val)
+            ret_val = add(ret_val, x)
         return (ret_val)
