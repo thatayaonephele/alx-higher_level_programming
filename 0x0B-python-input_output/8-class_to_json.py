@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-
-def simple_delete(a_dictionary, key=""):
-    c = a_dictionary.get(key)
-    if c is not None:
-        del a_dictionary[key]
-    return (a_dictionary)
+def class_to_json(obj):
+    """A function that defines a Class to JSON
+    """
+    return obj.__dict__
