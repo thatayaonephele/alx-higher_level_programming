@@ -35,7 +35,7 @@ if __name__ == "__main__":
     n = 0
     try:
         n = int(sys.av[1])
-    except ValueError:
+    except:
         print("N must be a number")
         sys.e(1)
     if n < 4:
