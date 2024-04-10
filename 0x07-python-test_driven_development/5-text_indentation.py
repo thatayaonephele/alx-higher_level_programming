@@ -13,20 +13,18 @@ def text_indentation(text):
         a TypeError exception with the message
         text must be a string
     """
-    l_t = len(text)
     if not isinstance(text, str):
         raise TypeError("text must be a string")
     ch = 1
-    while ((ch >= l_t) is False) and text[ch] == ' ':
+    while ((ch >= len(text)) is False) and text[ch] == ' ':
         ch = ch + 1
-    l_t = len(text)
-    while ((ch >= l_t) is False):
+    while ((ch >= len(text)) is False):
         print(text[ch], end="")
         if text[ch] == "\n" or text[ch] in ".?:":
             if text[ch] in ".?:":
                 print("\n")
             ch = ch + 1
-            while(((ch >= l_t) is False) and (text[ch] == ' ')):
+            while (((ch >= len(text)) is False) and (text[ch] == ' ')):
                 ch = ch + 1
             continue
         ch = ch + 1
