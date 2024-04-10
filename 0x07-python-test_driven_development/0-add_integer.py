@@ -4,7 +4,7 @@
 
 def add_integer(a, b=98):
     """Execute the addition of b and a in integer format.
-    Typecast all arguments of float type to integer prior to adding them together.
+    Typecast all arguments of float type to integer prior to adding them.
     Raises:
         TypeError: If b or a is a non-float and non-integer type.
     """
