@@ -19,7 +19,7 @@ if __name__ == "__main__":
             script_size[0] = script_size[0] + int(tmp[-1])
             result = int(tmp[-2])
             if result in c:
-                c[result] = c + 1
+		c[result] = c + 1
         except ValueError:
             pass
 
