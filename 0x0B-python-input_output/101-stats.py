@@ -1,44 +1,60 @@
 #!/usr/bin/python3
 """
-A module that logs the parsing scripts
+A module that logs the parsing of scripts.
 """
 
+import sys
 
-from sys import stdin as st
+
+def check_match(line, script_size, status_codes):
+    """
+    A function that parses a line of log input and updates the metrics.
+
+    Args:
+        line (str): The log line.
+        script_size (list): A list containing the total size of files.
+        status_codes (dict): A dictionary with status codes as keys.
+    """
+    try:
+        line = line.strip()  # Remove newline and other trailing characters
+        parts = line.split(" ")
+        # Update the total script size
+        script_size[0] += int(parts[-1])
+        # Get the status code and update its count if valid
+        status_code = int(parts[-2])
+        if status_code in status_codes:
+            status_codes[status_code] += 1
+    except (ValueError, IndexError):
+        pass
+
+
+def print_stats(script_size, status_codes):
+    """
+    Prints the accumulated statistics.
+
+    Args:
+        script_size (list): A list containing the total size of files.
+        status_codes (dict): A dictionary with status codes as keys.
+    """
+    print("File size: {}".format(script_size[0]))
+    for code in sorted(status_codes.keys()):
+        if status_codes[code] > 0:
+            print("{}: {}".format(code, status_codes[code]))
 
 
 if __name__ == "__main__":
-    script_size = [0]
-    c = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
+    script_size = [0]  # Using a list to maintain a mutable total size
+    status_codes = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
 
-    def check_match(line):
-        '''A function that looks for a matching regular expression line'''
-        try:
-            line = line[:-1]
-            tmp = line.split(" ")
-            script_size[0] = script_size[0] + int(tmp[-1])
-            result = int(tmp[-2])
-            if result in c:
-                c[result] = c + 1
-        except ValueError:
-            pass
+    line_count = 0  # To count the number of lines processed
 
-    def print_stats():
-        """Prints out the accumulated stats."""
-        print("File size: {}".format(script_size[0]))
-        for k in sorted(c.keys()):
-            if c[k]:
-                print("{}: {}".format(k, c[k]))
-    x = 1
-    b = 0
-    a = 10
     try:
-        for pos in st:
-            check_match(pos)
-            if x % a == b:
-                print_stats()
-            x = x + 1
+        for line in sys.stdin:
+            check_match(line, script_size, status_codes)
+            line_count += 1
+            if line_count % 10 == 0:
+                print_stats(script_size, status_codes)
     except KeyboardInterrupt:
-        print_stats()
+        print_stats(script_size, status_codes)
         raise
-    print_stats()
+    print_stats(script_size, status_codes)
