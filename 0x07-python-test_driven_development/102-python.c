@@ -1,28 +1,18 @@
-#include "Python.h"
+import ctypes
 
-/**
- * print_python_string - Prints information about Python strings.
- * @p: A PyObject string object.
- */
-void print_python_string(PyObject *p)
-{
-	long l; /*the length*/
-
-	fflush(stdout);
-
-	printf("[.] string object info\n");
-	if (strcmp(p->ob_type->tp_name, "str") != 0)
-	{
-		printf("  [ERROR] Invalid String Object\n");
-		return;
-	}
-
-	l = ((PyASCIIObject *)(p))->l;
-
-	if (PyUnicode_IS_COMPACT_ASCII(p))
-		printf("  type: compact ascii\n");
-	else
-		printf("  type: compact unicode object\n");
-	printf("  length: %ld\n", length);
-	printf("  value: %ls\n", PyUnicode_AsWideCharString(p, &length));
-}
+lib = ctypes.CDLL('./libPython.so')
+lib.print_python_string.argtypes = [ctypes.py_object]
+s = "The spoon does not exist"
+lib.print_python_string(s)
+s = "ложка не существует"
+lib.print_python_string(s)
+s = "La cuillère n'existe pas"
+lib.print_python_string(s)
+s = "勺子不存在"
+lib.print_python_string(s)
+s = "숟가락은 존재하지 않는다."
+lib.print_python_string(s)
+s = "スプーンは存在しない"
+lib.print_python_string(s)
+s = b"The spoon does not exist"
+lib.print_python_string(s)
